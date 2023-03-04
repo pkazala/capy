@@ -1,4 +1,5 @@
 import Script from "./Script";
+import bagel from '../assets/bagel.png'
 
 function Map() {
   Script("https://polyfill.io/v3/polyfill.min.js?features=default");
@@ -21,7 +22,14 @@ function Map() {
     "https://maps.googleapis.com/maps/api/js?key=AIzaSyD8OAF_09DCaMjEz6MdVSYqdPc7JreJybQ&callback=initMap&v=weekly"
   );
   window.initMap = initMap;
-  return <div id="map" class="w-3/4 h-9/10 rounded-xl m-10"></div>;
+  return (
+    <div class="relative w-3/4 h-9/10 m-10">
+      <div class="absolute z-50 left-0 bottom-0 m-6 w-28 p-2 bg-red-300 text-white rounded-xl">Fact: <br/>1.3 billion tons of food are wasted every year
+      <img src={bagel} alt="bagel" class="absolute bottom-24 left-16 w-16" />
+      </div>
+      <div id="map" class="h-full w-full rounded-xl"></div>
+    </div>
+  );
 }
 
 export default Map;
