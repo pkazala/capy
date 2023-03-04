@@ -26,14 +26,18 @@ const SearchBar = (props) => {
   };
 
   return (
-    <>
-      <div class="m-2">
-        <label for={id} style={invalid() ? "" : "display:none"}>
-          Error: Please enter valid item
-        </label>
-        <input id={id} type="text" value={input()} onChange={updateInput} />
-      </div>
-    </>
+    <div class="mt-2 mb-2">
+      <label for={id} style={invalid() ? "" : "display:none"} class="text-red-400 mb-2">
+        Error: Please enter valid item
+      </label>
+      <input
+        id={id}
+        type="text"
+        value={input()}
+        onChange={updateInput}
+        class="bg-slate-100 rounded-xl p-1 shadow-lg"
+      />
+    </div>
   );
 };
 
