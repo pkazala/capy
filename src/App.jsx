@@ -2,6 +2,8 @@ import { createEffect, createSignal } from 'solid-js';
 import logo from './assets/CAPY_BANK.png';
 import Map from './components/Map.jsx'
 import SearchBar from './components/SearchBar';
+import Sidebar from './components/Sidebar.jsx'
+
 
 function App() {
 
@@ -20,7 +22,8 @@ function App() {
   })
 
   return (
-    <section class='flex m-auto flex-col items-center'>
+    <section class='flex m-auto w-screen h-screen'>
+      <Sidebar/>
       <img src={logo} alt="capy" class='max-w-xl' />
       <label for="distance">Enter travel distance</label>
       <SearchBar input={input} setInput={setInput} arr={Array.from({ length: 1000 }, (_, i) => i + 1)} id="distance" />
@@ -29,7 +32,6 @@ function App() {
       <label for="dietary">Enter dietary requirements</label>
       <SearchBar input={input} setInput={setInput} arr={validInputs} id="dietary" />
       <Map/>
-      <header class='font-bold text-5xl'>Capy Bank</header>
     </section>
   );
 }

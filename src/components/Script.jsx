@@ -9,9 +9,9 @@ function Script(url) {
 
     document.body.appendChild(script);
 
-    return () => {
+    /* return () => {
       document.body.removeChild(script);
-    };
+    }; */
   });
 }
 
