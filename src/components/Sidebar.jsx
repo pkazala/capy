@@ -36,7 +36,7 @@ function Sidebar() {
   });
   return (
     <section class="w-1/4 max-w-72 flex flex-col items-center border-r-2 h-screen shadow-lg text-left text-lg xl:text-2xl">
-      <img src={logo} alt="capy" />
+      <img src={logo} alt="capy" class="my-4" />
       <div class="flex flex-col items-start mx-10">
         <p for="distance">Enter travel distance:</p>
         <SearchBar

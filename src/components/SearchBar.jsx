@@ -22,7 +22,7 @@ const SearchBar = (props) => {
 
   return (
     <div class="mt-2 mb-2">
-      <label for={id} style={invalid() ? "" : "display:none"} class="text-red-400 mb-2">
+      <label for={id} style={invalid() ? "" : "display:none"} class="text-red-400 text-sm mb-2">
         Error: Please enter valid item
       </label>
       <input
