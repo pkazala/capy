@@ -1,31 +1,40 @@
-import { createSignal } from "solid-js";
+import { createSignal, createEffect } from "solid-js";
 
 const SearchBar = (props) => {
-    const {id, input, setInput, arr} = props;
+  const { id, input, setInput, arr } = props;
 
-    const [invalid, setInvalid] = createSignal(false)
+  const [invalid, setInvalid] = createSignal(false);
 
-    const updateInput = (event) => {
-        const current = event.target.value;
-        let didSet = false 
-        arr.filter((elem)=>{
-            if (current == elem){
-                setInvalid(false);
-                didSet = true;
-                setInput(current);
-            }
-        })
-        if(!didSet){
-            setInvalid(true);
-        }
-    };
+  createEffect(() => {
+    console.log(arr());
+  })
 
-    return (
-        <>
-            <label for={id} style={invalid() ? "" : "display:none"}>Error: Please enter valid item</label>
-            <input id={id} type="text" value={input()} onChange={updateInput} />
-        </>
-    );
+  const updateInput = (event) => {
+    console.log(arr());
+    const current = event.target.value;
+    let didSet = false;
+    arr().filter((elem) => {
+      if (current == elem) {
+        setInvalid(false);
+        didSet = true;
+        setInput(current);
+      }
+    });
+    if (!didSet) {
+      setInvalid(true);
+    }
+  };
+
+  return (
+    <>
+      <div class="m-2">
+        <label for={id} style={invalid() ? "" : "display:none"}>
+          Error: Please enter valid item
+        </label>
+        <input id={id} type="text" value={input()} onChange={updateInput} />
+      </div>
+    </>
+  );
 };
 
 export default SearchBar;

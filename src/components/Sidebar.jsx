@@ -1,6 +1,6 @@
 import logo from "../assets/CAPY_BANK.png";
-import SearchBar from './SearchBar';
-import { createEffect, createSignal } from 'solid-js';
+import SearchBar from "./SearchBar";
+import { createEffect, createSignal } from "solid-js";
 
 function Sidebar() {
   const [distance, setDistance] = createSignal("");
@@ -33,27 +33,27 @@ function Sidebar() {
   createEffect(async () => {
     const response = await fetch("./src/assets/ingredients.json");
     setIngredients(await response.json());
+    console.log(ingredients);
   });
   return (
-    <section class="w-1/4 flex flex-col items-center border-r-2 h-screen shadow-lg">
+    <section class="w-1/4 flex flex-col items-center border-r-2 h-screen shadow-lg p-4 text-left">
       <img src={logo} alt="capy" class="mt-8" />
-      <div class="h-64 m-4">whats that word that starts with n</div>
-      <label for="distance">Enter travel distance</label>
+      <label for="distance">Enter travel distance:</label>
       <SearchBar
         input={distance}
         setInput={setDistance}
-        arr={Array.from({ length: 1000 }, (_, i) => i + 1)}
+        arr={() => {return Array.from({ length: 1000 }, (_, i) => i + 1);}}
         id="distance"
       />
-      <label for="excludeFoods">Enter exluded ingredients</label>
+      <label for="excludeFoods">Enter exluded ingredients:</label>
       <SearchBar
         input={excludeIngr}
         setInput={setExcludeIngr}
-        arr={ingredients()}
+        arr={ingredients}
         id="excludeFoods"
       />
-      <label for="dietary">Enter dietary requirements</label>
-      <SearchBar input={diet} setInput={setDiet} arr={diets} id="dietary" />
+      <label for="dietary">Enter dietary requirements:</label>
+      <SearchBar input={diet} setInput={setDiet} arr={() => {return diets;}} id="dietary" />
     </section>
   );
 }
