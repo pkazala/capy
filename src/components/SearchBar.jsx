@@ -6,7 +6,6 @@ const SearchBar = (props) => {
   const [invalid, setInvalid] = createSignal(false);
 
   const updateInput = (event) => {
-    console.log(arr());
     const current = event.target.value;
     let didSet = false;
     arr().filter((elem) => {
