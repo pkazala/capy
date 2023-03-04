@@ -33,7 +33,6 @@ function Sidebar() {
   createEffect(async () => {
     const response = await fetch("./src/assets/ingredients.json");
     setIngredients(await response.json());
-    console.log(ingredients);
   });
   return (
     <section class="w-1/4 max-w-72 flex flex-col items-center border-r-2 h-screen shadow-lg text-left text-lg xl:text-2xl">
