@@ -10,7 +10,7 @@ function Map() {
   function getLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((e)=> {
-        setLoc([parseInt(e.coords.latitude.toString()), parseInt(e.coords.longitude.toString())]);
+        setLoc([e.coords.latitude, e.coords.longitude]);
         setC({
           lat: e.coords.latitude,
           lng: e.coords.longitude,
@@ -88,6 +88,7 @@ function Map() {
     let location = false;
     let UserMarker = ""
     const loca = loc();
+    const cen = center;
     if(loca.length > 0){
       location = true;
     }
@@ -97,12 +98,12 @@ function Map() {
       let LatLng = center();
        map = new google.maps.Map(document.getElementById("map"), {
         zoom: 15,
-        center:{lat: loca[0], lng: loca[1]} ,
+        center: {lat: loca[0], lng:loca[1]}
       });
-      map.setCenter(center);
-
+       map.setCenter(center);
+       console.log(loca[0]);
        UserMarker = new google.maps.Marker({
-        position: LatLng,
+        position: map.getCenter(),
         map,
         title: "Our Position",
         icon: "https://developers.google.com/maps/documentation/javascript/examples/full/images/library_maps.png"
