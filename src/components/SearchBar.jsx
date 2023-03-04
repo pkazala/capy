@@ -1,12 +1,27 @@
-import { createSignal, createEffect } from "solid-js";
+import { createSignal, createEffect, For } from "solid-js";
 
 const SearchBar = (props) => {
   const { id, input, setInput, arr } = props;
 
   const [invalid, setInvalid] = createSignal(false);
+  const [results, setResults] = createSignal([]);
 
   const updateInput = (event) => {
     const current = event.target.value;
+
+    setResults(arr().filter((elem)=>{
+        if(typeof(elem) != "number"){
+                if(current == ""){
+                    return;
+                }
+                return elem.match(current) != null;
+            }
+        }));
+    console.log(results())
+    setResults(results().splice(5));
+    console.log(results());
+    
+
     let didSet = false;
     arr().filter((elem) => {
       if (current == elem) {
@@ -20,6 +35,18 @@ const SearchBar = (props) => {
     }
   };
 
+//   createEffect(() =>{
+//     setResults(arr().filter((elem)=>{
+//         if(typeof(elem) != "number"){
+//             // // console.log(elem);
+//             // if(input() == ""){
+//                 //     return;
+//                 // }
+//                 return elem.match(input()) != null;
+//             }
+//         }).slice(10));
+//   });
+
   return (
     <div class="mt-2 mb-2">
       <label for={id} style={invalid() ? "" : "display:none"} class="text-red-400 text-sm mb-2">
@@ -32,6 +59,16 @@ const SearchBar = (props) => {
         onChange={updateInput}
         class="bg-slate-100 rounded-xl p-1 shadow-lg"
       />
+
+        <Show when={input() != ""}>
+            <ul>
+                <For each={results()}>{(result, i) =>
+                        <li>
+                        {result}
+                    </li>
+                }</For>
+            </ul>
+        </Show>
     </div>
   );
 };

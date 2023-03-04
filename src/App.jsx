@@ -1,3 +1,4 @@
+import { Show } from 'solid-js';
 import Map from './components/Map.jsx'
 import Sidebar from './components/Sidebar.jsx'
 
