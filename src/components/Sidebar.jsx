@@ -15,21 +15,6 @@ function Sidebar() {
   ];
   const [ingredients, setIngredients] = createSignal([]);
 
-  createEffect(() => {
-    console.log(distance());
-    setDistance("");
-  });
-
-  createEffect(() => {
-    console.log(diet());
-    setDiet("");
-  });
-
-  createEffect(() => {
-    console.log(excludeIngr());
-    setExcludeIngr("");
-  });
-
   createEffect(async () => {
     const response = await fetch("./src/assets/ingredients.json");
     setIngredients(await response.json());
@@ -42,18 +27,18 @@ function Sidebar() {
         <SearchBar
           input={distance}
           setInput={setDistance}
-          arr={Array.from({ length: 1000 }, (_, i) => i + 1)}
+          arr={() => {return Array.from({ length: 1000 }, (_, i) => i + 1);}}
           id="distance"
         />
         <p for="excludeFoods">Enter exluded ingredients:</p>
         <SearchBar
           input={excludeIngr}
           setInput={setExcludeIngr}
-          arr={ingredients()}
+          arr={ingredients}
           id="excludeFoods"
         />
         <p for="dietary">Enter dietary requirements:</p>
-        <SearchBar input={diet} setInput={setDiet} arr={diets} id="dietary" />
+        <SearchBar input={diet} setInput={setDiet} arr={() => {return diets;}} id="dietary" />
         <button class="self-center w-full text-2xl bg-[#00539F] p-1 text-white rounded-xl mt-2">Search</button>
       </div>
     </section>
