@@ -1,9 +1,38 @@
 import Script from "./Script";
-import { createEffect } from 'solid-js';
+import { createEffect, createSignal } from 'solid-js';
 
 function Map() {
   Script("https://polyfill.io/v3/polyfill.min.js?features=default");
   let map;
+
+  let [loc,setLoc] = createSignal([]);
+  let [center, setC] = createSignal(0);
+  function getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((e)=> {
+        setLoc([parseInt(e.coords.latitude.toString()), parseInt(e.coords.longitude.toString())]);
+        setC({
+          lat: e.coords.latitude,
+          lng: e.coords.longitude,
+        });
+      }, ()=>{},{enableHighAccuracy: true})
+    }
+  }
+  createEffect(() =>{
+    getLocation();
+    center();
+
+  })
+  createEffect(() =>{
+    getLocation();
+    loc();
+
+
+  });
+
+
+
+
 
   createEffect(()=> {
     console.log(calculateDistance(55.95333709746188,-3.194140510650442,55.95275837083679,-3.1903639120341842));
@@ -13,16 +42,16 @@ function Map() {
   const calculateDistance = (lat1,lon1,lat2,lon2)  => {
     var R = 6371; // Radius of the earth in km
     var dLat = deg2rad(lat2-lat1);  // deg2rad below
-    var dLon = deg2rad(lon2-lon1); 
-    var a = 
+    var dLon = deg2rad(lon2-lon1);
+    var a =
       Math.sin(dLat/2) * Math.sin(dLat/2) +
-      Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
-      Math.sin(dLon/2) * Math.sin(dLon/2); 
-    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+      Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
+      Math.sin(dLon/2) * Math.sin(dLon/2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
     var d = R * c; // Distance in km
     return d;
   }
-  
+
   const deg2rad = (deg) =>  {
     return deg * (Math.PI/180)
   }
@@ -56,34 +85,75 @@ function Map() {
     ]
 
   function initMap() {
-    const myLatLng = { lat: 55.944831503142886, lng: -3.187265119000685 }; 
-    const map = new google.maps.Map(document.getElementById("map"), {
-      zoom: 4,
-      center: myLatLng, 
-    });
+    let location = false;
+    let UserMarker = ""
+    const loca = loc();
+    if(loca.length > 0){
+      location = true;
+    }
+    console.log(loca.length);
+    let map = ""
+    if(location === true) {
+      let LatLng = center();
+       map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 15,
+        center:{lat: loca[0], lng: loca[1]} ,
+      });
+      map.setCenter(center);
 
-    new google.maps.Marker({
-      position: myLatLng,
-      map,
-      title: "Hello World!",
-    });
+       UserMarker = new google.maps.Marker({
+        position: LatLng,
+        map,
+        title: "Our Position",
+        icon: "https://developers.google.com/maps/documentation/javascript/examples/full/images/library_maps.png"
+      });
+      const infowindow = new google.maps.InfoWindow({
+        content:"Your Position"
+      });
+      infowindow.open(map,UserMarker);
+    } else{
+     let LatLng = { lat: 55.944831503142886, lng: -3.187265119000685 };
+
+       map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 15,
+        center: LatLng,
+      });
+    }
 
     shops.map((shop)=>{
       console.log(shop.title)
-      const myLatLng = { lat: shop.Lat, lng: shop.Lon }; 
+      const myLatLng = { lat: shop.Lat, lng: shop.Lon };
       new google.maps.Marker({
         position: myLatLng,
         map,
         title: shop.title,
+        icon: "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"
       });
     })
+    if(location === false){
+      const infowindow = new google.maps.InfoWindow({
+        content:"Your Position"
+      });
+
+      let pos = "";
+      google.maps.event.addListener(map,"click",(e)=>{
+        if(UserMarker){
+          UserMarker.setMap(null);
+          UserMarker = null
+        }
+
+        pos = {lat: e.latLng.lat(),lng: e.latLng.lng()}
+        UserMarker = new google.maps.Marker({position: pos, map, title: "Position", icon: "https://developers.google.com/maps/documentation/javascript/examples/full/images/library_maps.png"});
+        infowindow.open(map,UserMarker);   } );
+    }
+
   }
   Script(
     "https://maps.googleapis.com/maps/api/js?key=AIzaSyD8OAF_09DCaMjEz6MdVSYqdPc7JreJybQ&callback=initMap&v=weekly"
   );
   window.initMap = initMap;
   console.log(shops)
-  
+
   return <div id="map" class="w-3/4 h-9/10 rounded-xl m-10"></div>;
 }
 
