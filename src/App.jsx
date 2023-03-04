@@ -7,13 +7,25 @@ import Sidebar from './components/Sidebar.jsx'
 
 function App() {
 
-  const [input, setInput] = createSignal("");
-  const validInputs = ["apple", "banana", "crack"];
+  const [distance, setDistance] = createSignal("");
+  const [diet, setDiet] = createSignal("");
+  const [excludeIngr, setExcludeIngr] = createSignal("");
+  const diets = ["vegan", "vegetarian", "ketogenic", "gluten free", "pescetarian"];
   const [ingredients, setIngredients] = createSignal([]);
 
   createEffect(() => {
-    console.log(input());
-    setInput("");
+    console.log(distance());
+    setDistance("");
+  })
+
+  createEffect(() => {
+    console.log(diet());
+    setDiet("");
+  })
+
+  createEffect(() => {
+    console.log(excludeIngr());
+    setExcludeIngr("");
   })
 
   createEffect(async() => {
@@ -26,11 +38,11 @@ function App() {
       <Sidebar/>
       <img src={logo} alt="capy" class='max-w-xl' />
       <label for="distance">Enter travel distance</label>
-      <SearchBar input={input} setInput={setInput} arr={Array.from({ length: 1000 }, (_, i) => i + 1)} id="distance" />
+      <SearchBar input={distance} setInput={setDistance} arr={Array.from({ length: 1000 }, (_, i) => i + 1)} id="distance" />
       <label for="excludeFoods">Enter exluded ingredients</label>
-      <SearchBar input={input} setInput={setInput} arr={ingredients()} id="excludeFoods" />
+      <SearchBar input={excludeIngr} setInput={setExcludeIngr} arr={ingredients()} id="excludeFoods" />
       <label for="dietary">Enter dietary requirements</label>
-      <SearchBar input={input} setInput={setInput} arr={validInputs} id="dietary" />
+      <SearchBar input={diet} setInput={setDiet} arr={diets} id="dietary" />
       <Map/>
     </section>
   );
