@@ -1,14 +1,19 @@
-import { createSignal } from "solid-js";
+import { createSignal, createEffect } from "solid-js";
 
 const SearchBar = (props) => {
   const { id, input, setInput, arr } = props;
 
   const [invalid, setInvalid] = createSignal(false);
 
+  createEffect(() => {
+    console.log(arr());
+  })
+
   const updateInput = (event) => {
+    console.log(arr());
     const current = event.target.value;
     let didSet = false;
-    arr.filter((elem) => {
+    arr().filter((elem) => {
       if (current == elem) {
         setInvalid(false);
         didSet = true;

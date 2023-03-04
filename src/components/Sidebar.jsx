@@ -33,6 +33,7 @@ function Sidebar() {
   createEffect(async () => {
     const response = await fetch("./src/assets/ingredients.json");
     setIngredients(await response.json());
+    console.log(ingredients);
   });
   return (
     <section class="w-1/4 flex flex-col items-center border-r-2 h-screen shadow-lg p-4 text-left">
@@ -41,18 +42,18 @@ function Sidebar() {
       <SearchBar
         input={distance}
         setInput={setDistance}
-        arr={Array.from({ length: 1000 }, (_, i) => i + 1)}
+        arr={() => {return Array.from({ length: 1000 }, (_, i) => i + 1);}}
         id="distance"
       />
       <label for="excludeFoods">Enter exluded ingredients:</label>
       <SearchBar
         input={excludeIngr}
         setInput={setExcludeIngr}
-        arr={ingredients()}
+        arr={ingredients}
         id="excludeFoods"
       />
       <label for="dietary">Enter dietary requirements:</label>
-      <SearchBar input={diet} setInput={setDiet} arr={diets} id="dietary" />
+      <SearchBar input={diet} setInput={setDiet} arr={() => {return diets;}} id="dietary" />
     </section>
   );
 }
