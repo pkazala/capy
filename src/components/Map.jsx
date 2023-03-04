@@ -23,7 +23,7 @@ function Map() {
   );
   window.initMap = initMap;
   return (
-    <div class="relative w-3/4 h-9/10 m-10">
+    <div class="sticky w-3/4 h-9/10 m-10">
       <div class="absolute z-50 left-0 bottom-0 m-6 w-28 p-2 bg-red-300 text-white rounded-xl">Fact: <br/>1.3 billion tons of food are wasted every year
       <img src={bagel} alt="bagel" class="absolute bottom-24 left-16 w-16" />
       </div>
