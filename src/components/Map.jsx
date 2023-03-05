@@ -12,13 +12,20 @@ function Map() {
   let [center, setC] = createSignal(0);
   function getLocation() {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((e)=> {
-        setLoc([e.coords.latitude, e.coords.longitude]);
-        setC({
-          lat: e.coords.latitude,
-          lng: e.coords.longitude,
-        });
-      }, ()=>{},{enableHighAccuracy: true})
+      navigator.geolocation.getCurrentPosition(
+        (e) => {
+          setLoc([
+            parseInt(e.coords.latitude.toString()),
+            parseInt(e.coords.longitude.toString()),
+          ]);
+          setC({
+            lat: e.coords.latitude,
+            lng: e.coords.longitude,
+          });
+        },
+        () => {},
+        { enableHighAccuracy: true }
+      );
     }
   }
   createEffect(() => {
@@ -226,7 +233,7 @@ function Map() {
   function initMap() {
     let UserMarker = "";
     const loca = loc();
-    const cen = center;
+    if (loca.length > 0) {
       location = true;
     }
     console.log(loca.length);
@@ -235,12 +242,12 @@ function Map() {
       let LatLng = center();
       map = new google.maps.Map(document.getElementById("map"), {
         zoom: 15,
-        center: {lat: loca[0], lng:loca[1]}
+        center: { lat: loca[0], lng: loca[1] },
       });
-       map.setCenter(center);
-       console.log(loca[0]);
-       UserMarker = new google.maps.Marker({
-        position: map.getCenter(),
+      map.setCenter(center);
+
+      UserMarker = new google.maps.Marker({
+        position: LatLng,
         map,
         title: "Our Position",
         icon: "src/assets/cappy.png",
@@ -310,7 +317,7 @@ function Map() {
   );
   window.initMap = initMap;
   return (
-    <div class="sticky w-3/4 h-9/10 m-10">
+    <div class="sticky top-6 w-3/4 h-9/10 m-10">
       <div class="absolute z-50 left-0 bottom-0 m-6 w-28 p-2 bg-red-300 text-white rounded-xl">
         Fact: <br />
         1.3 billion tons of food are wasted every year
