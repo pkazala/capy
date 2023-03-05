@@ -222,12 +222,20 @@ loc();
     }
 
   ]
+  // setPath(examle);
+  function func(path){
+    
+    console.log(path)
+    console.log("i was called");
+    setPath(path)
+    document.getElementById("bruh").innerText = path.toString();
+  }
   return (
 <section class='flex m-auto w-screen h-screen font-main overflow-x-hidden'>
-      <Sidebar path={path} setPath={setPath} shops={shops} walkableShops={walkableShops} distanceSignal={[distance, setDistance]} dietSignal={[dietArr, setDietArr]} excludeSignal={[exIngrArr, setExIngrArr]} includeSignal={[incIngrArr, setIncIngrArr]} search={search}/>
+      <Sidebar path={path} setPath={func} shops={shops} walkableShops={walkableShops} distanceSignal={[distance, setDistance]} dietSignal={[dietArr, setDietArr]} excludeSignal={[exIngrArr, setExIngrArr]} includeSignal={[incIngrArr, setIncIngrArr]} search={search}/>
 
 
-    <Map playerLoc={loc} shops={shops} walkshops={walkableShops} path={examle}/>
+    <Map playerLoc={loc} shops={shops} walkshops={walkableShops} path={path}/>
 
 
     </section>

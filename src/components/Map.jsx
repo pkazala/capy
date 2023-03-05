@@ -55,7 +55,7 @@ function Map(props) {
 
   let [shopsMaker,setShopMaker] = createSignal([]);
   const shops=props.shops;
-  const walkshops=props.path;
+  
 
 
 
@@ -154,6 +154,8 @@ function Map(props) {
   }
 
   function finishInit() {
+    
+    const walkshops=props.path();
     console.log("Finish Innit ?")
 
     const directionsService = new google.maps.DirectionsService();
@@ -224,6 +226,7 @@ function Map(props) {
             // Use this new renderer with the result
             renderArray[i].setDirections(result);
             renderArray[i].setMap(map());
+            
 
 
           }
