@@ -1,4 +1,4 @@
-import logo from "../assets/capy.png";
+import logo from "../assets/CAPY_BANK.png";
 import SearchBar from "./SearchBar";
 import { createEffect, createSignal } from "solid-js";
 
