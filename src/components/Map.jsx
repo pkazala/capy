@@ -127,13 +127,26 @@ function Map(props) {
 
     shops.map((shop) => {
       const myLatLng = {lat: shop.Lat, lng: shop.Lon};
+      let icon;
+      if (shop.title == "Sainsbury's") {
+        icon = "src/assets/sainsbury.svg";
+      } else if (shop.title == "Tesco") {
+        icon = "src/assets/tesco.svg";
+      } else if (shop.title == "Lidl") {
+        icon = "src/assets/lidl.png";
+      } else if (shop.title == "Co-op") {
+        icon = "src/assets/coop.svg";
+      } else {
+        const icon =
+            "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png";
+      }
       const shopMarker = new google.maps.Marker({
         position: myLatLng,
         map: map(),
         zIndex: 10,
         title: shop.title,
         animation: "",
-        icon: "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"
+        icon: icon
       });
       setShopMaker([...shopsMaker(),shopMarker]);
     });
