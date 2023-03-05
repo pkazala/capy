@@ -34,19 +34,19 @@ loc();
   })
   const shops = [
     {title:"Sainsbury's",Lat:55.95385154368854,Lon:-3.194370456886452,Ing:["Bread","vinegar","Grapes"]},
-    {title:"Sainsbury's",Lat:55.949063888569064,Lon:-3.189514369792723,Ing:["Bread","vinegar","Grapes"]},
+    {title:"Sainsbury's",Lat:55.949063888569064,Lon:-3.189514369792723,Ing:["Lmao","vinegar","Grapes"]},
     {title:"Sainsbury's",Lat:55.946435470253384,Lon:-3.1812146030759427,Ing:["Bread","vinegar","Grapes"]},
-    {title:"Sainsbury's",Lat:55.94469887960705,Lon:-3.1909595409774085,Ing:["Bread","vinegar","Grapes"]},
+    {title:"Sainsbury's",Lat:55.94469887960705,Lon:-3.1909595409774085,Ing:["Bread","Jam","Grapes"]},
     {title:"Sainsbury's",Lat:55.94138349407988,Lon:-3.1830218464726507,Ing:["Bread","vinegar","Grapes"]},
-    {title:"Sainsbury's",Lat:55.93863400095199,Lon:-3.1776829585610447,Ing:["Bread","vinegar","Grapes"]},
-    {title:"Sainsbury's",Lat:55.946437413813335,Lon:-3.2006310538438365,Ing:["Bread","vinegar","Grapes"]},
-    {title:"Sainsbury's",Lat:55.93665631556673,Lon:-3.197673533205771,Ing:["Bread","vinegar","Grapes"]},
-    {title:"Sainsbury's",Lat:55.9465988281203,Lon:-3.195795114460836,Ing:["Bread","vinegar","Grapes"]},
-    {title:"Sainsbury's",Lat:55.9459927792938,Lon:-3.210086245316522,Ing:["Bread","vinegar","Grapes"]},
+    {title:"Sainsbury's",Lat:55.93863400095199,Lon:-3.1776829585610447,Ing:["Coco","vinegar","Grapes"]},
+    {title:"Sainsbury's",Lat:55.946437413813335,Lon:-3.2006310538438365,Ing:["Boba","vinegar","Grapes"]},
+    {title:"Sainsbury's",Lat:55.93665631556673,Lon:-3.197673533205771,Ing:["Bread","vinegar","Bruh"]},
+    {title:"Sainsbury's",Lat:55.9465988281203,Lon:-3.195795114460836,Ing:["USB","vinegar","Grapes"]},
+    {title:"Sainsbury's",Lat:55.9459927792938,Lon:-3.210086245316522,Ing:["Bread","Pen","Grapes"]},
     {title:"Sainsbury's",Lat:55.94465897177873,Lon:-3.2110243266867613,Ing:["Bread","vinegar","Grapes"]},
-    {title:"Sainsbury's",Lat:55.94203146185667,Lon:-3.2164366231323682,Ing:["Bread","vinegar","Grapes"]},
-    {title:"Sainsbury's",Lat:55.957107569334525,Lon:-3.1994025214387443,Ing:["Bread","vinegar","Grapes"]},
-    {title:"Sainsbury's",Lat:55.95844138217219,Lon:-3.2097270115166827,Ing:["Bread","vinegar","Grapes"]},{title:"Tesco",Lat:55.94522887871374,Lon:-3.183496555234711,Ing:["Bread","vinegar","Grapes"]},
+    {title:"Sainsbury's",Lat:55.94203146185667,Lon:-3.2164366231323682,Ing:["Cola","vinegar","Grapes"]},
+    {title:"Sainsbury's",Lat:55.957107569334525,Lon:-3.1994025214387443,Ing:["Bread","Jafa","Grapes"]},
+    {title:"Sainsbury's",Lat:55.95844138217219,Lon:-3.2097270115166827,Ing:["Bread","vinegar","Redbulls"]},{title:"Tesco",Lat:55.94522887871374,Lon:-3.183496555234711,Ing:["Bread","vinegar","Grapes"]},
     {title:"Tesco",Lat:55.9486586942626,Lon:-3.185128269690482,Ing:["Bread","vinegar","Grapes"]},
     {title:"Tesco",Lat:55.95070338153543,Lon:-3.177226817339035,Ing:["Bread","vinegar","Grapes"]},
     {title:"Tesco",Lat:55.936404084488515,Lon:-3.1802697204901813,Ing:["Bread","vinegar","Grapes"]},
@@ -108,46 +108,74 @@ loc();
     console.log(walkableShops());
     let VL = [];
     setWalkableShops(findViable(player(),parseInt(distance())/100,shops))
-    console.log("bruh",walkableShops())
+    // console.log("bruh",walkableShops())
 
     function findViable(start,maxdis,array){
-      // console.log("called valiable")
-      // console.log(array)
+
       let poopoopeepee = []
       for (let i = 0; i<array.length; i++){
-        // console.log("poopoopeepee",poopoopeepee)
-        // console.log("I am calling the loop at ",i)
-        // console.log(start,array[i]);
-        // start=start();
+
         let v1 = calculateDistance(start.Lat, start.Lon, array[i].Lat, array[i].Lon);
         let v2 = calculateDistance(array[i].Lat, array[i].Lon, player().Lat, player().Lon);
-        // console.log(v1,v2,maxdis);
         if(v1 + v2 < maxdis){
 
-          poopoopeepee.push(array[i]);
+          
+          poopoopeepee.push(i);
           VL.push([...poopoopeepee]);
-          // console.log("condition met");
-          // console.log(array);
+
           let arraya = array.slice(0,i).concat(i>array.length ? [] : array.slice(i+1))
-          // let arraya = array.slice(0,i)
-          // console.log(arraya);
-          // const temp = arraya.splice
+
           findViable(array[i], maxdis - v1, arraya);
         }
       }
-      return VL;
-      // const [out,setOut]=createSignal([])
-      // array.forEach(element => {
-      //   if (calculateDistance(start.Lat, start.Lon, element.Lat, element.Lon)>maxdis){
-      //     setOut(out().push(element))
-      //   }
-      // });
-      // return out();
+      let uniqueVL = [];
+      for (let i =0; i<VL.length;i++){
+        let temp =VL[i].sort().toString()
+        if (!uniqueVL.includes(temp)){
+          uniqueVL.push(temp)
+        }
+      }
+      let output =[];
+      uniqueVL.map( e=>
+        output.push(JSON.parse("[" + e + "]"))
+      )
+      
+      return output;
+
     }
-    // console.log(walkableShops())
-    //get {https://api.spoonacular.com/recipes/findByIngredients?apiKey=e677f976977f475b8f02d5530cac525d&number=1&ingredients={list},&black={black},&diet=diet}
+    console.log(walkableShops())
+    // let fml =[{"path":"player+walkacbleshops+player","ing":"unqiue list that is a combo of the path"},{}]
+    let fml =[]
+    walkableShops().map((p)=>{
+      let temp = [player()]
+      let uniqueIng=player().Ing
+      p.map((i)=>{
+        let shop=shops[i]
+        console.log(shop)
+        temp.push(shop);
+        shop.Ing.map((ing)=>{
+          if(!uniqueIng.includes(ing)){uniqueIng.push(ing)}
+        })
+      })
+      temp.push(player());
+      fml.push({"path":temp,"Ing":uniqueIng});
+    });
+    console.log("fml",fml)
+    let recipes = []
+    for (let i = 0;i<fml.length;i++){
+      let ing = fml[i].Ing.toString()
+      console.log(ing)
+      let recipe = "https://api.spoonacular.com/recipes/findByIngredients?apiKey=e677f976977f475b8f02d5530cac525d&number=1&ingredients="+ing+",&black="+exIngrArr()+",&diet="+dietArr()
+      console.log(recipe)
+      recipes.push({"recipe":recipe,"path":fml[i].path})
+    }
+ 
     document.getElementById("bruh").innerText = VL.toString();
-  }
+ 
+    console.log(recipes)
+    return recipes;
+    //get {https://api.spoonacular.com/recipes/findByIngredients?apiKey=e677f976977f475b8f02d5530cac525d&number=1&ingredients={ing},&black={exIngrArr()},&diet=dietArr()}
+   }
   const examle = [
 
     {
