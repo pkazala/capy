@@ -790,7 +790,7 @@ const json = [
 
 const Results = (props) => {
   return (
-    <div class="m-1 w-96">
+    <div class="m-1 w-80">
       <ul class="h-[80vh] overflow-y-scroll">
         <For each={json.filter(recipe => {
             if(props.exclude().length > 0){
