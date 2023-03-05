@@ -69,14 +69,10 @@ function Sidebar(props) {
             arr={ingredients}
             id="excludeFoods"
           />
-<<<<<<< HEAD
           <ul>
             <For each={exIngrArr()}>{(item, i) => <li>{item}</li>}</For>
           </ul>
-          <p for="includeFood">Enter food in cupboard:</p>
-=======
           <p class="font-bold" for="includeFood">Enter food in cupboard:</p>
->>>>>>> c8b61d6a5245c53a05081a5483900f985174ff84
           <SearchBar
             input={includeIngr}
             setInput={setIncludeIngr}
@@ -97,7 +93,7 @@ function Sidebar(props) {
         </div>
       ) : (
         <div class="flex flex-col gap-4 items-center mx-10 mr-[3.65rem]">
-          <Results></Results>
+          <Results diet={dietArr} exclude={exIngrArr} include={incIngrArr}></Results>
           <button
             onClick={() => setIsSearched(false)}
             class="self-center w-9/12 text-2xl bg-[#00539F] p-1 text-white rounded-xl mt-3 hover:shadow-lg hover:mt-2 transition-all duration-300 hover:bg-blue-500"
