@@ -1,6 +1,7 @@
 import Script from "./Script";
 import bagel from "../assets/bagel.png";
 import { createEffect, createSignal } from "solid-js";
+import cappy from "../assets/cappy.png";
 
 function Map() {
   Script("https://polyfill.io/v3/polyfill.min.js?features=default");
@@ -249,7 +250,7 @@ function Map() {
         position: LatLng,
         map,
         title: "Our Position",
-        icon: "https://developers.google.com/maps/documentation/javascript/examples/full/images/library_maps.png",
+        icon: "src/assets/cappy.png",
       });
       const infowindow = new google.maps.InfoWindow({
         content: "Your Position",
@@ -267,11 +268,24 @@ function Map() {
     shops.map((shop) => {
       console.log(shop.title);
       const myLatLng = { lat: shop.Lat, lng: shop.Lon };
+      let icon;
+      if (shop.title == "Sainsbury's") {
+        icon = "src/assets/sainsbury.svg";
+      } else if (shop.title == "Tesco") {
+        icon = "src/assets/tesco.svg";
+      } else if (shop.title == "Lidl") {
+        icon = "src/assets/lidl.png";
+      } else if (shop.title == "Co-op") {
+        icon = "src/assets/coop.svg";
+      } else {
+        const icon =
+          "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png";
+      }
       new google.maps.Marker({
         position: myLatLng,
         map,
         title: shop.title,
-        icon: "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png",
+        icon: icon,
       });
     });
     if (location === false) {
@@ -292,7 +306,7 @@ function Map() {
           position: pos,
           map,
           title: "Position",
-          icon: "https://developers.google.com/maps/documentation/javascript/examples/full/images/library_maps.png",
+          icon: "src/assets/cappy.png",
         });
         infowindow.open(map, UserMarker);
       });
