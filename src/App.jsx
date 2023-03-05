@@ -69,7 +69,7 @@ loc();
 
 
   const [loc,setLoc] = createSignal([]);
-  const [distance, setDistance] = createSignal(12);
+  const [distance, setDistance] = createSignal("");
   const [walkableShops, setWalkableShops] = createSignal([]);
   const [dietArr, setDietArr] = createSignal([]);
   const [path, setPath] = createSignal([]);
