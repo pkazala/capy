@@ -855,7 +855,7 @@ const Results = (props) => {
             return true;
         })}>
           {(item, i) => (
-            <li class="flex flex-col mt-5 items-center p-4 text-center shadow-xl rounded-xl">
+            <li onClick={() => {console.log("clicked", i()); props.setPath(props.walkableShops()[i()]); console.log(props.path())}} class="flex flex-col mt-5 items-center p-4 text-center shadow-xl rounded-xl">
               <img src={item.image} class="rounded-xl w-52 h-40 object-cover"></img>
               <p class="w-fit px-2 mt-1">{item.title}</p>
             </li>
