@@ -58,13 +58,20 @@ const SearchBar = (props) => {
       >
         Error: Please enter valid item
       </label>
-      <input
-        id={id}
-        type="text"
-        value={input()}
-        onChange={updateInput}
-        class="bg-slate-100 rounded-xl p-1 shadow-lg"
-      />
+      <div class="flex items-center">
+        <input
+          id={id}
+          type="text"
+          value={input()}
+          onChange={updateInput}
+          class="bg-slate-100 rounded-xl p-1 shadow-lg"
+        />
+        <Show when={typeof arr()[0] != "number"}>
+          <button onClick={updateInput} class="h-max w-max px-2 rounded-full ml-1 bg-green-300">
+            +
+          </button>
+        </Show>
+      </div>
       <Show when={input() != ""}>
         <ul class="mb-5">
           <For each={results()}>
@@ -75,9 +82,6 @@ const SearchBar = (props) => {
             )}
           </For>
         </ul>
-      </Show>
-      <Show when={typeof arr()[0] != "number"}>
-        <button onClick={updateInput}>Add</button>
       </Show>
     </div>
   );
