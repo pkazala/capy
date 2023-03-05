@@ -1,4 +1,4 @@
-# Capy Food Bank
+# Capy Food Bank🌎🍞
 
 ## An incredible app that helps you save your money and the world at the same time!
 
@@ -19,3 +19,5 @@ npm i
 
 npm run dev
 ```
+
+Thank you for reading🌝
