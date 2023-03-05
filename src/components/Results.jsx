@@ -790,7 +790,7 @@ const json = [
 
 const Results = (props) => {
   return (
-    <div class="m-1">
+    <div class="m-1 w-96">
       <ul class="h-[80vh] overflow-y-scroll">
         <For each={json.filter(recipe => {
             if(props.exclude().length > 0){
@@ -855,7 +855,7 @@ const Results = (props) => {
             return true;
         })}>
           {(item, i) => (
-            <li class="flex flex-col mt-5 items-center p-4 text-center shadow-xl rounded-xl">
+            <li class="flex flex-col mt-5 items-center p-4 text-center shadow-xl rounded-xl cursor-pointer">
               <img src={item.image} class="rounded-xl w-52 h-40 object-cover"></img>
               <p class="w-fit px-2 mt-1">{item.title}</p>
             </li>
