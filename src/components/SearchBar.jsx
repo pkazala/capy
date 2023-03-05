@@ -7,6 +7,9 @@ const SearchBar = (props) => {
 
   const updateInput = (event) => {
     const current = event.target.value;
+    if(current == ""){
+        return;
+    }
     let didSet = false;
     arr().filter((elem) => {
       if (current == elem) {
@@ -36,6 +39,9 @@ const SearchBar = (props) => {
         onChange={updateInput}
         class="bg-slate-100 rounded-xl p-1 shadow-lg"
       />
+      <Show when={typeof(arr()[0]) != "number"}>
+        <button onClick={updateInput}>Add</button>
+      </Show>
     </div>
   );
 };
