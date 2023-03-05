@@ -224,7 +224,7 @@ loc();
   ]
   return (
 <section class='flex m-auto w-screen h-screen font-main overflow-x-hidden'>
-      <Sidebar path={path} setPath={setPath} walkableShops={walkableShops} distanceSignal={[distance, setDistance]} dietSignal={[dietArr, setDietArr]} excludeSignal={[exIngrArr, setExIngrArr]} includeSignal={[incIngrArr, setIncIngrArr]} search={search}/>
+      <Sidebar path={path} setPath={setPath} shops={shops} walkableShops={walkableShops} distanceSignal={[distance, setDistance]} dietSignal={[dietArr, setDietArr]} excludeSignal={[exIngrArr, setExIngrArr]} includeSignal={[incIngrArr, setIncIngrArr]} search={search}/>
 
 
     <Map playerLoc={loc} shops={shops} walkshops={walkableShops} path={examle}/>
