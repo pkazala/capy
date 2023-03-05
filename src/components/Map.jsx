@@ -12,20 +12,13 @@ function Map() {
   let [center, setC] = createSignal(0);
   function getLocation() {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (e) => {
-          setLoc([
-            parseInt(e.coords.latitude.toString()),
-            parseInt(e.coords.longitude.toString()),
-          ]);
-          setC({
-            lat: e.coords.latitude,
-            lng: e.coords.longitude,
-          });
-        },
-        () => {},
-        { enableHighAccuracy: true }
-      );
+      navigator.geolocation.getCurrentPosition((e)=> {
+        setLoc([e.coords.latitude, e.coords.longitude]);
+        setC({
+          lat: e.coords.latitude,
+          lng: e.coords.longitude,
+        });
+      }, ()=>{},{enableHighAccuracy: true})
     }
   }
   createEffect(() => {
@@ -233,7 +226,7 @@ function Map() {
   function initMap() {
     let UserMarker = "";
     const loca = loc();
-    if (loca.length > 0) {
+    const cen = center;
       location = true;
     }
     console.log(loca.length);
@@ -242,12 +235,12 @@ function Map() {
       let LatLng = center();
       map = new google.maps.Map(document.getElementById("map"), {
         zoom: 15,
-        center: { lat: loca[0], lng: loca[1] },
+        center: {lat: loca[0], lng:loca[1]}
       });
-      map.setCenter(center);
-
-      UserMarker = new google.maps.Marker({
-        position: LatLng,
+       map.setCenter(center);
+       console.log(loca[0]);
+       UserMarker = new google.maps.Marker({
+        position: map.getCenter(),
         map,
         title: "Our Position",
         icon: "src/assets/cappy.png",
