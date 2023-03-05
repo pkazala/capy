@@ -78,6 +78,7 @@ function App() {
     console.log("called search");
     const [player,setPlayer]= createSignal([]);
     console.log(loc())
+
     setPlayer({title:"Player",Lat:55.95743127388005,Lon:-3.190498710992911,Ing:incIngrArr()})
     // setPlayer({title:"Player",Lat:loc()[0],Lon:loc()[1],Ing:incIngrArr()})
     console.log(player());
@@ -123,6 +124,7 @@ function App() {
     walkableShops().map((p)=>{
       let temp = [player()]
       let uniqueIng=player().Ing
+      console.log(uniqueIng);
       p.map((i)=>{
         let shop=shops[i]
         console.log(shop)
@@ -139,7 +141,7 @@ function App() {
     for (let i = 0;i<fml.length;i++){
       let ing = fml[i].Ing.toString()
       console.log(ing)
-      let recipe = "https://api.spoonacular.com/recipes/findByIngredients?apiKey=e677f976977f475b8f02d5530cac525d&number=1&ingredients="+ing+",&black="+exIngrArr()+",&diet="+dietArr()
+      let recipe = "https://api.spoonacular.com/recipes/findByIngredients?apiKey=e677f976977f475b8f02d5530cac525d&number=1&ingredients="+ing+",&excludeIngredients="+exIngrArr()+",&diet="+dietArr()
       console.log(recipe)
       recipes.push({"recipe":recipe,"path":fml[i].path})
     }
