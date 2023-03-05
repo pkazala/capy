@@ -8,6 +8,30 @@ import Sidebar from './components/Sidebar.jsx'
 
 
 function App() {
+  const c = document.createElement("p");
+   c.id = "bruh";
+   c.style.visibility = 'hidden';
+   document.getElementById("root").appendChild(c);
+
+  function getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+          (e) => {
+            setLoc([
+              (e.coords.latitude),
+              (e.coords.longitude),
+            ]);
+
+          },
+          () => {},
+          { enableHighAccuracy: true }
+      );
+    }
+  }
+  createEffect(() => {
+    getLocation();
+loc();
+  })
   const shops = [
     {title:"Sainsbury's",Lat:55.95385154368854,Lon:-3.194370456886452,Ing:["Bread","vinegar","Grapes"]},
     {title:"Sainsbury's",Lat:55.949063888569064,Lon:-3.189514369792723,Ing:["Bread","vinegar","Grapes"]},
@@ -43,7 +67,7 @@ function App() {
   //   {title:"Joisie's Puss",Lat:55.949063888569064,Lon:-3.189514369792723,Ing:["Bread","vinegar","Grapes"]},
   //   ]
 
-  
+
   const [loc,setLoc] = createSignal([]);
   const [distance, setDistance] = createSignal(12);
   const [walkableShops, setWalkableShops] = createSignal([]);
@@ -51,7 +75,7 @@ function App() {
   const [path, setPath] = createSignal([]);
   const [exIngrArr, setExIngrArr] = createSignal([]);
   const [incIngrArr, setIncIngrArr] = createSignal([]);
-  
+
   createEffect(()=> {
     console.log(calculateDistance(55.95333709746188,-3.194140510650442,55.95275837083679,-3.1903639120341842));
   })
@@ -79,8 +103,9 @@ function App() {
     const [player,setPlayer]= createSignal([]);
     console.log(loc())
     setPlayer({title:"Player",Lat:55.95743127388005,Lon:-3.190498710992911,Ing:incIngrArr()})
-    // setPlayer({title:"Player",Lat:loc()[0],Lon:loc()[1],Ing:incIngrArr()})
+   // setPlayer({title:"Player",Lat:parseFloat(loc()[0]),Lon:parseFloat(loc()[1]),Ing:incIngrArr()})
     console.log(player());
+    console.log(walkableShops());
     let VL = [];
     setWalkableShops(findViable(player(),parseInt(distance())/100,shops))
     console.log("bruh",walkableShops())
@@ -98,10 +123,10 @@ function App() {
         let v2 = calculateDistance(array[i].Lat, array[i].Lon, player().Lat, player().Lon);
         // console.log(v1,v2,maxdis);
         if(v1 + v2 < maxdis){
-          
+
           poopoopeepee.push(array[i]);
           VL.push([...poopoopeepee]);
-          // console.log("condition met"); 
+          // console.log("condition met");
           // console.log(array);
           let arraya = array.slice(0,i).concat(i>array.length ? [] : array.slice(i+1))
           // let arraya = array.slice(0,i)
@@ -121,12 +146,60 @@ function App() {
     }
     // console.log(walkableShops())
     //get {https://api.spoonacular.com/recipes/findByIngredients?apiKey=e677f976977f475b8f02d5530cac525d&number=1&ingredients={list},&black={black},&diet=diet}
+    document.getElementById("bruh").innerText = VL.toString();
   }
+  const examle = [
 
+    {
+      "title": "Sainsbury's",
+      "Lat": 55.95385154368854,
+      "Lon": -3.194370456886452,
+      "Ing": [
+        "Bread",
+        "vinegar",
+        "Grapes"
+      ]
+    },
+    {
+      "title": "Sainsbury's",
+      "Lat": 55.957107569334525,
+      "Lon": -3.1994025214387443,
+      "Ing": [
+        "Bread",
+        "Jafa",
+        "Grapes"
+      ]
+    },
+    {
+      "title": "Tesco",
+      "Lat": 55.95743127388005,
+      "Lon": -3.190498710992911,
+      "Ing": [
+        "Bread",
+        "vinegar",
+        "Grapes"
+      ]
+    },
+    {
+      "title": "Tesco",
+      "Lat": 55.95783939470905,
+      "Lon": -3.1965087912209715,
+      "Ing": [
+        "Bread",
+        "vinegar",
+        "Grapes"
+      ]
+    }
+
+  ]
   return (
 <section class='flex m-auto w-screen h-screen font-main overflow-x-hidden'>
       <Sidebar distanceSignal={[distance, setDistance]} dietSignal={[dietArr, setDietArr]} excludeSignal={[exIngrArr, setExIngrArr]} includeSignal={[incIngrArr, setIncIngrArr]} search={search}/>
-      <Map playerLoc={[loc,setLoc]} shops={walkableShops} path={[]}/>
+
+
+    <Map playerLoc={loc} shops={shops} walkshops={walkableShops} path={examle}/>
+
+
     </section>
   );
 }
