@@ -2,8 +2,8 @@ import logo from "../assets/CAPY_BANK.png";
 import SearchBar from "./SearchBar";
 import { createEffect, createSignal } from "solid-js";
 
-function Sidebar() {
-  const [distance, setDistance] = createSignal("");
+function Sidebar(props) {
+  const [distance, setDistance] = props.distanceSignal;
   const [diet, setDiet] = createSignal("");
   const [excludeIngr, setExcludeIngr] = createSignal("");
   const [includeIngr, setIncludeIngr] = createSignal("");
@@ -16,19 +16,13 @@ function Sidebar() {
   ];
   const [ingredients, setIngredients] = createSignal([]);
 
-  const [dietArr, setDietArr] = createSignal([]);
-  const [exIngrArr, setExIngrArr] = createSignal([]);
-  const [incIngrArr, setIncIngrArr] = createSignal([]);
+  const [dietArr, setDietArr] = props.dietSignal;
+  const [exIngrArr, setExIngrArr] = props.excludeSignal;
+  const [incIngrArr, setIncIngrArr] = props.includeSignal;
 
   createEffect(async () => {
     const response = await fetch("./src/assets/ingredients.json");
     setIngredients(await response.json());
-  });
-
-  createEffect(() => {
-    if(distance() != ""){
-      setDistance("");
-    }
   });
 
   createEffect(() => {
@@ -97,7 +91,7 @@ function Sidebar() {
             </li>
           }</For>
         </ul>
-        <button class="self-center w-full text-2xl bg-[#00539F] p-1 text-white rounded-xl mt-2">Search</button>
+        <button class="self-center w-full text-2xl bg-[#00539F] p-1 text-white rounded-xl mt-2" onclick={props.search}>Search</button>
       </div>
     </section>
   );
