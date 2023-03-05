@@ -1,6 +1,7 @@
 import logo from "../assets/CAPY_BANK.png";
 import Results from "./Results";
 import SearchBar from "./SearchBar";
+import Picker from "./Picker";
 import { createEffect, createSignal } from "solid-js";
 
 function Sidebar() {
@@ -42,14 +43,7 @@ function Sidebar() {
           id="excludeFoods"
         />
         <p for="dietary">Enter dietary requirements:</p>
-        <SearchBar
-          input={diet}
-          setInput={setDiet}
-          arr={() => {
-            return diets;
-          }}
-          id="dietary"
-        />
+        <Picker diets={diets}/>
         <button onClick={() => setIsSearched(true)} class="self-center w-full text-2xl bg-[#00539F] p-1 text-white rounded-xl mt-3 hover:shadow-lg hover:mt-2 transition-all duration-300 hover:bg-blue-500">
           Search
         </button>
