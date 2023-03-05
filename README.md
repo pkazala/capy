@@ -8,7 +8,7 @@
 
 ## A quick demo of our app ↴
 
-![ezgif com-optimize (2)](https://user-images.githubusercontent.com/40291469/222955458-975d4db7-f8c8-415f-859d-ba682fa28537.gif)
+![3d6c1e4f-a918-419c-94cb-5cb04e81146b](https://user-images.githubusercontent.com/40291469/222956376-d0963e3e-afd3-47b2-9571-ebbd66463ee5.gif)
 
 ## To run the project make sure to have node.js installed
 
