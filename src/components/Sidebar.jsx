@@ -21,33 +21,32 @@ function Sidebar(props) {
   const [dietArr, setDietArr] = props.dietSignal;
   const [exIngrArr, setExIngrArr] = props.excludeSignal;
   const [incIngrArr, setIncIngrArr] = props.includeSignal;
-
   const [isSearched, setIsSearched] = createSignal(false);
 
   createEffect(async () => {
     const response = await fetch("./src/assets/ingredients.json");
     setIngredients(await response.json());
   });
-
+  
   createEffect(() => {
-    setDietArr((d) => (diet() == "" ? d : [...d, diet()]));
+    setDietArr(d => diet() == "" ? d : [...d, diet()]);
     setDiet("");
   });
 
   createEffect(() => {
-    setExIngrArr((i) => (excludeIngr() == "" ? i : [...i, excludeIngr()]));
+    setExIngrArr(i => excludeIngr() == "" ? i : [...i, excludeIngr()]);
     setExcludeIngr("");
   });
 
   createEffect(() => {
-    setIncIngrArr((i) => (includeIngr() == "" ? i : [...i, includeIngr()]));
+    setIncIngrArr(i => includeIngr() == "" ? i : [...i, includeIngr()]);
     setIncludeIngr("");
   });
 
-  function exec() {
-    setIsSearched(true);
-    props.search();
-  }
+function exec(){
+  setIsSearched(true);
+  props.search();
+}
 
   return (
     <section class="w-1/4 max-w-72 flex flex-col items-center border-r-2 pb-10 h-max min-h-screen shadow-lg text-left text-lg xl:text-2xl">
