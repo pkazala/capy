@@ -96,7 +96,7 @@ function Sidebar(props) {
         </div>
       ) : (
         <div class="flex flex-col gap-4 items-center mx-10 mr-[3.65rem]">
-          <Results diet={dietArr} exclude={exIngrArr} include={incIngrArr}></Results>
+          <Results path={props.path} setPath={props.setPath} walkableShops={props.walkableShops} diet={dietArr} exclude={exIngrArr} include={incIngrArr}></Results>
           <button
             onClick={() => {setIsSearched(false); setDietArr([]); setExIngrArr([]); setIncIngrArr([]);}}
             class="self-center w-9/12 text-2xl bg-[#00539F] p-1 text-white rounded-xl mt-3 hover:shadow-lg hover:mt-2 transition-all duration-300 hover:bg-blue-500"
