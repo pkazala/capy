@@ -27,33 +27,33 @@ function Sidebar(props) {
     const response = await fetch("./src/assets/ingredients.json");
     setIngredients(await response.json());
   });
-  
+
   createEffect(() => {
-    setDietArr(d => diet() == "" ? d : [...d, diet()]);
+    setDietArr((d) => (diet() == "" ? d : [...d, diet()]));
     setDiet("");
   });
 
   createEffect(() => {
-    setExIngrArr(i => excludeIngr() == "" ? i : [...i, excludeIngr()]);
+    setExIngrArr((i) => (excludeIngr() == "" ? i : [...i, excludeIngr()]));
     setExcludeIngr("");
   });
 
   createEffect(() => {
-    setIncIngrArr(i => includeIngr() == "" ? i : [...i, includeIngr()]);
+    setIncIngrArr((i) => (includeIngr() == "" ? i : [...i, includeIngr()]));
     setIncludeIngr("");
   });
 
-function exec(){
-  setIsSearched(true);
-  props.search();
-}
+  function exec() {
+    setIsSearched(true);
+    props.search();
+  }
 
   return (
     <section class="w-1/4 max-w-72 flex flex-col items-center border-r-2 pb-10 h-max min-h-screen shadow-lg text-left text-lg xl:text-2xl">
       <img src={logo} alt="capy" class="my-4 lg:mx-8" />
       {!isSearched() ? (
         <div class="flex flex-col items-start mx-10">
-          <p for="distance">Enter travel distance:</p>
+          <p class="font-bold" for="distance">Enter travel distance:</p>
           <SearchBar
             input={distance}
             setInput={setDistance}
@@ -62,17 +62,21 @@ function exec(){
             }}
             id="distance"
           />
-          <p for="excludeFoods">Enter exluded ingredients:</p>
+          <p class="font-bold" for="excludeFoods">Enter exluded ingredients:</p>
           <SearchBar
             input={excludeIngr}
             setInput={setExcludeIngr}
             arr={ingredients}
             id="excludeFoods"
           />
+<<<<<<< HEAD
           <ul>
             <For each={exIngrArr()}>{(item, i) => <li>{item}</li>}</For>
           </ul>
           <p for="includeFood">Enter food in cupboard:</p>
+=======
+          <p class="font-bold" for="includeFood">Enter food in cupboard:</p>
+>>>>>>> c8b61d6a5245c53a05081a5483900f985174ff84
           <SearchBar
             input={includeIngr}
             setInput={setIncludeIngr}
@@ -82,7 +86,7 @@ function exec(){
           <ul>
             <For each={incIngrArr()}>{(item, i) => <li>{item}</li>}</For>
           </ul>
-          <p for="dietary">Enter dietary requirements:</p>
+          <p class="font-bold" for="dietary">Enter dietary requirements:</p>
           <Picker diets={diets} />
           <button
             onClick={exec}
