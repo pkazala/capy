@@ -1,4 +1,5 @@
 import logo from "../assets/CAPY_BANK.png";
+import Results from "./Results";
 import SearchBar from "./SearchBar";
 import { createEffect, createSignal } from "solid-js";
 
@@ -105,7 +106,9 @@ function Sidebar() {
       ) : (
         <button onClick={() => setIsSearched(false)} class="self-center w-full text-2xl bg-[#00539F] p-1 text-white rounded-xl mt-3 mb-10 hover:shadow-lg hover:mt-2 transition-all duration-300 hover:bg-blue-500">
           Go back
-        </button>
+          </button>
+          <Results></Results>
+        </div>
       )}
     </section>
   );
