@@ -6,6 +6,9 @@
 
 ![capybara-gif-9](https://user-images.githubusercontent.com/40291469/222954082-edb0582d-17b8-46a2-a174-059b4d41ec05.gif)
 
+## A quick demo of our app ↴
+
+![ezgif com-optimize (2)](https://user-images.githubusercontent.com/40291469/222955458-975d4db7-f8c8-415f-859d-ba682fa28537.gif)
 
 ## To run the project make sure to have node.js installed
 
