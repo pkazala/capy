@@ -38,7 +38,7 @@ function Map(props) {
 
   const shops=props.shops
 
-  let location = false;
+  // let location = false;
 
   function initMap() {
     let UserMarker = "";

@@ -7,6 +7,7 @@ function Sidebar(props) {
   const [distance, setDistance] = props.distanceSignal;
   const [diet, setDiet] = createSignal("");
   const [excludeIngr, setExcludeIngr] = createSignal("");
+  const [includeIngr, setIncludeIngr] = createSignal("");
   const diets = [
     "vegan",
     "vegetarian",
@@ -46,7 +47,7 @@ function Sidebar(props) {
 
 function exec(){
   setIsSearched(true);
-  props.search;
+  props.search();
 }
 
   return (
@@ -63,21 +64,21 @@ function exec(){
           }}
           id="distance"
         />
-        <p for="excludeFoods">Enter exluded ingredients:</p>
+        <p for="excludeFoods">Enter excluded ingredients:</p>
         <SearchBar
           input={excludeIngr}
           setInput={setExcludeIngr}
           arr={ingredients}
           id="excludeFoods"
         />
-        <p for="dietary">Enter dietary requirements:</p>
+        <p for="includeFood">Enter food in cupboard:</p>
         <SearchBar
-          input={diet}
-          setInput={setDiet}
+          input={includeIngr}
+          setInput={setIncludeIngr}
           arr={() => {
-            return diets;
+            return includeIngr;
           }}
-          id="dietary"
+          id="includeFoods"
         />
         <ul>
           <For each={incIngrArr()}>{
