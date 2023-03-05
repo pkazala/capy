@@ -69,13 +69,14 @@ function exec(){
             arr={ingredients}
             id="excludeFoods"
           />
+          <ul>
+            <For each={exIngrArr()}>{(item, i) => <li>{item}</li>}</For>
+          </ul>
           <p for="includeFood">Enter food in cupboard:</p>
           <SearchBar
             input={includeIngr}
             setInput={setIncludeIngr}
-            arr={() => {
-              return includeIngr;
-            }}
+            arr={ingredients}
             id="includeFoods"
           />
           <ul>
