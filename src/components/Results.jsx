@@ -788,11 +788,51 @@ const json = [
   },
 ];
 
-const Results = () => {
+const Results = (props) => {
   return (
     <div class="m-1">
       <ul class="h-[80vh] overflow-y-scroll">
-        <For each={json}>
+        <For each={json.filter(recipe => {
+            if(props.exclude().length > 0){
+                for(let i = 0; i < recipe.usedIngredientCount; i++){
+                    for(let j = 0; j < props.exclude().length; j++){
+                        console.log(recipe.usedIngredients[i], props.exclude()[j]);
+                        if(recipe.usedIngredients[i].name.match(props.exclude()[j])){
+                            return false;
+                        }
+                    }
+                }
+
+                for(let i = 0; i < recipe.missedIngredientCount; i++){
+                    for(let j = 0; j < props.exclude.length; j++){
+                        if(recipe.missedIngredients[i].name.match(props.exclude[j])){
+                            return false;
+                        }
+                    }
+                }
+                
+                if(props.include().length > 0){
+                    for(let i = 0; i < recipe.usedIngredientCount; i++){
+                        for(let j = 0; j < props.include().length; j++){
+                            console.log(recipe.usedIngredients[i], props.include()[j]);
+                            if(recipe.usedIngredients[i].name.match(props.include()[j])){
+                                return true;
+                            }
+                        }
+                    }
+    
+                    for(let i = 0; i < recipe.missedIngredientCount; i++){
+                        for(let j = 0; j < props.include.length; j++){
+                            if(recipe.missedIngredients[i].name.match(props.include[j])){
+                                return true;
+                            }
+                        }
+                    }
+                    return false;
+                }
+            }
+            return true;
+        })}>
           {(item, i) => (
             <li class="flex flex-col mt-5 items-center p-4 text-center shadow-xl rounded-xl">
               <img src={item.image} class="rounded-xl w-52 h-40 object-cover"></img>
