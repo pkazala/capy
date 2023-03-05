@@ -830,6 +830,27 @@ const Results = (props) => {
                     }
                     return false;
                 }
+                return true;
+            }
+
+            if(props.include().length > 0){
+                for(let i = 0; i < recipe.usedIngredientCount; i++){
+                    for(let j = 0; j < props.include().length; j++){
+                        console.log(recipe.usedIngredients[i], props.include()[j]);
+                        if(recipe.usedIngredients[i].name.match(props.include()[j])){
+                            return true;
+                        }
+                    }
+                }
+
+                for(let i = 0; i < recipe.missedIngredientCount; i++){
+                    for(let j = 0; j < props.include.length; j++){
+                        if(recipe.missedIngredients[i].name.match(props.include[j])){
+                            return true;
+                        }
+                    }
+                }
+                return false;
             }
             return true;
         })}>
