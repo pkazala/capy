@@ -69,14 +69,10 @@ function Sidebar(props) {
             arr={ingredients}
             id="excludeFoods"
           />
-<<<<<<< HEAD
           <ul>
             <For each={exIngrArr()}>{(item, i) => <li>{item}</li>}</For>
           </ul>
-          <p for="includeFood">Enter food in cupboard:</p>
-=======
           <p class="font-bold" for="includeFood">Enter food in cupboard:</p>
->>>>>>> c8b61d6a5245c53a05081a5483900f985174ff84
           <SearchBar
             input={includeIngr}
             setInput={setIncludeIngr}
