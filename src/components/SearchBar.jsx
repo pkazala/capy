@@ -8,7 +8,6 @@ const SearchBar = (props) => {
 
   const updateInput = (event) => {
     const current = event.target.value;
-
     setResults(arr().filter((elem)=>{
         if(typeof(elem) != "number"){
                 if(current == ""){
@@ -20,8 +19,9 @@ const SearchBar = (props) => {
     console.log(results())
     setResults(results().splice(5));
     console.log(results());
-    
-
+    if(current == ""){
+        return;
+    }
     let didSet = false;
     arr().filter((elem) => {
       if (current == elem) {
@@ -49,7 +49,11 @@ const SearchBar = (props) => {
 
   return (
     <div class="mt-2 mb-2">
-      <label for={id} style={invalid() ? "" : "display:none"} class="text-red-400 text-sm mb-2">
+      <label
+        for={id}
+        style={invalid() ? "" : "display:none"}
+        class="text-red-400 text-sm mb-2"
+      >
         Error: Please enter valid item
       </label>
       <input
@@ -59,7 +63,6 @@ const SearchBar = (props) => {
         onChange={updateInput}
         class="bg-slate-100 rounded-xl p-1 shadow-lg"
       />
-
         <Show when={input() != ""}>
             <ul>
                 <For each={results()}>{(result, i) =>
@@ -69,6 +72,9 @@ const SearchBar = (props) => {
                 }</For>
             </ul>
         </Show>
+      <Show when={typeof(arr()[0]) != "number"}>
+        <button onClick={updateInput}>Add</button>
+      </Show>
     </div>
   );
 };
