@@ -19,7 +19,7 @@
   "dependencies": {
     "mapbox-gl": "^2.13.0",
     "solid-js": "^1.6.10",
-    "solid-map-gl": "^1.7.0",
+    "solid-map-gl": "^1.7.1",
     "solid-mapbox": "^0.0.100"
   }
 }
